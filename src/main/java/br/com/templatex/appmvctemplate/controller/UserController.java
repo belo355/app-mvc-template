@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.parser.Entity;
+import javax.transaction.Transactional;
 import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public Response<Entity> delete(@PathVariable(required = true) Long id){
         try {
             Optional<User> user = userRepository.findById(id);
@@ -63,6 +65,10 @@ public class UserController {
             log.info(e.getMessage());
         }
         return null;
+    }
+
+    public void dateilUser(){
+//        TODO: create detail using dto
     }
 
 }
